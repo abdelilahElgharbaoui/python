@@ -9,6 +9,8 @@ def main():
     st.sidebar.header('Upload Forcast')
     uploaded_file1 = st.sidebar.file_uploader("Choose a file", type=["xlsx", "xls"])
 
+
+
     # Upload Classeur2
     st.sidebar.header('Upload History')
     uploaded_file2 = st.sidebar.file_uploader("Choose another file", type=["xlsx", "xls"])
@@ -16,6 +18,7 @@ def main():
     if uploaded_file1 is not None and uploaded_file2 is not None:
         # Load data from uploaded files
         df2 = pd.read_excel(uploaded_file1)
+
         df1 = pd.read_excel(uploaded_file2)
 
         df2['WH'] = df2['WH'].str.split(',').apply(lambda x: np.array(x, dtype=int))
@@ -41,7 +44,7 @@ def main():
         df_non_null['Variant'] = df_non_null['Variant']
         df_non_null['WH'] = df_non_null['WH'].apply(tuple)
 
-        grouped_data = df_non_null.groupby(['Variant', 'WH'])['QTY'].sum()
+        grouped_data = df_non_null.groupby(['Variant', 'WH','DDATE'])['QTY'].sum()
         grouped_data.reset_index().to_excel('output_no_null.xlsx', index=False)
         # Print the result
         print(grouped_data)
