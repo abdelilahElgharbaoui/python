@@ -47,7 +47,7 @@ def main():
         st.write("### Results Variants with total quantity:")
         st.dataframe(grouped_data)
 
-        if grouped_data:
+        if st.button('Download Results'):
             output_buffer = BytesIO()
             grouped_data.reset_index().to_excel(output_buffer, index=False)
             output_buffer.seek(0)
