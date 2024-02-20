@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
+def save_updated_classeur2(classeur2,s):
+    classeur2.to_excel(f'result{s}.xlsx', index=False)
+    st.success(f"result{s} saved successfully!")
+
 def main():
     st.title('Matching Variants App')
 
@@ -86,10 +91,6 @@ def main():
         st.write("Click the button below to download the updated Results not Null.")
         st.button("Download Results Variants with total quantity", on_click=save_updated_classeur2, args=(grouped_data,3))
 
-
-def save_updated_classeur2(classeur2,s):
-    classeur2.to_excel(f'result{s}.xlsx', index=False)
-    st.success(f"result{s} saved successfully!")
 
 if __name__ == '__main__':
     main()
