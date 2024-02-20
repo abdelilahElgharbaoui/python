@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from pyxlsb import open_workbook as open_xlsb
-from io import BytesIO
+
 
 def main():
     st.title('Matching Variants Application')
