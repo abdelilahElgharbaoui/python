@@ -47,11 +47,11 @@ def main():
         st.write("### Results Variants with total quantity:")
         st.dataframe(grouped_data)
 
-        if st.button('Download Results'):
+        if grouped_data:
             output_buffer = BytesIO()
             grouped_data.reset_index().to_excel(output_buffer, index=False)
             output_buffer.seek(0)
-            st.download_button(label='Download Grouped Data', data=output_buffer, file_name='grouped_data.xlsx', key='download_button')
+            st.download_button(label='Download Results', data=output_buffer, file_name='grouped_data.xlsx', key='download_button')
 
         st.write("### History:")
         st.dataframe(df1)
