@@ -75,29 +75,29 @@ def main():
 
         st.dataframe(grouped_data)
 
-        st.write("### Save Results Variants not Null:")
-        st.write("Click the button below to download the updated Results not Null.")
-        if st.button("Download Results not Null", key='download_not_null'):
-            file_path = save_updated_classeur2(df_non_null, 1)
-            st.markdown(get_download_link(file_path, 'Download Results not Null'), unsafe_allow_html=True)
+    st.write("### Save Results Variants not Null:")
+    st.write("Click the button below to download the updated Results not Null.")
+    if st.button("Download Results not Null", key='download_not_null'):
+        file_path = save_updated_classeur2(df_non_null, 1)
+        st.markdown(get_download_link(file_path, 'Download Results not Null'), unsafe_allow_html=True)
 
-        # Save the updated file
-        st.write("### Save Results Variants Null:")
-        st.write("Click the button below to download the updated Results Null.")
-        if st.button("Download Results Variants Null", key='download_null'):
-            file_path = save_updated_classeur2(df_null, 2)
-            st.markdown(get_download_link(file_path, 'Download Results Variants Null'), unsafe_allow_html=True)
+    # Save the updated file
+    st.write("### Save Results Variants Null:")
+    st.write("Click the button below to download the updated Results Null.")
+    if st.button("Download Results Variants Null", key='download_null'):
+        file_path = save_updated_classeur2(df_null, 2)
+        st.markdown(get_download_link(file_path, 'Download Results Variants Null'), unsafe_allow_html=True)
 
-        # Save the updated file
-        st.write("### Save Results Variants with total quantity:")
-        st.write("Click the button below to download the updated Results with total quantity.")
-        if st.button("Download Results Variants with total quantity", key='download_total_qty'):
-            file_path = save_updated_classeur2(grouped_data.reset_index(), 3)
-            st.markdown(get_download_link(file_path, 'Download Results Variants with total quantity'), unsafe_allow_html=True)
+    # Save the updated file
+    st.write("### Save Results Variants with total quantity:")
+    st.write("Click the button below to download the updated Results with total quantity.")
+    if st.button("Download Results Variants with total quantity", key='download_total_qty'):
+        file_path = save_updated_classeur2(grouped_data.reset_index(), 3)
+        st.markdown(get_download_link(file_path, 'Download Results Variants with total quantity'), unsafe_allow_html=True)
 
 def get_download_link(file_path, label):
-            """Generate a download link for a file."""
-            href = f'<a href="/download/{file_path}" download="{file_path}">{label}</a>'
-            return href
+    """Generate a download link for a file."""
+    href = f'<a href="/download/{file_path}" download="{file_path}">{label}</a>'
+    return href
 if __name__ == '__main__':
     main()
