@@ -49,13 +49,9 @@ def main():
         # Filter df2 for rows where 'Variant' is not null
         df2_non_null = df2[df2['Variant'].notnull()]
 
-        st.write("### Results Variants with total quantity:")
-        st.dataframe(result_df)
-
-       
-        if st.button('Download All Results'):
+ 
+        if st.button('Download All Results', key='download_all_results'):
             download_results(result_df, 'results_all.xlsx')
-
 
         st.write("### History:")
         st.dataframe(grouped_decomp)
@@ -66,30 +62,30 @@ def main():
         st.write("### Results:")
         st.dataframe(df2)
 
-        if st.button('Download Null Results'):
-            download_results(df2, 'results.xlsx')
-
+        # Download button for all results
+        if st.button('Download All Results', key='download_all_results'):
+            download_results(df2, 'results_all.xlsx')
 
         st.write("### Results not Null:")
         st.dataframe(df2_non_null)
 
-        if st.button('Download Non-Null Results'):
+        # Download button for non-null results
+        if st.button('Download Non-Null Results', key='download_non_null_results'):
             download_results(df2_non_null, 'results_non_null.xlsx')
 
-    
         st.write("### Results Null:")
         st.dataframe(df2_null)
 
-        if st.button('Download Null Results'):
+        # Download button for null results
+        if st.button('Download Null Results', key='download_null_results'):
             download_results(df2_null, 'results_null.xlsx')
 
 
-def download_results(dataframe, filename):
-    output_buffer = BytesIO()
-    dataframe.reset_index().to_excel(output_buffer, index=False)
-    output_buffer.seek(0)
-    st.download_button(label=f'Download {filename}', data=output_buffer, file_name=filename, key=f'download_{filename}')
-
+        def download_results(dataframe, filename):
+            output_buffer = BytesIO()
+            dataframe.reset_index().to_excel(output_buffer, index=False)
+            output_buffer.seek(0)
+            st.download_button(label=f'Download {filename}', data=output_buffer, file_name=filename, key=f'download_{filename}')
 
 if __name__ == '__main__':
     main()
