@@ -49,7 +49,9 @@ def main():
         # Filter df2 for rows where 'Variant' is not null
         df2_non_null = df2[df2['Variant'].notnull()]
 
- 
+        st.write("### Results:")
+        st.dataframe(result_df)
+
         if st.button('Download All Results', key='download_results'):
             download_results(result_df, 'results_all.xlsx')
 
