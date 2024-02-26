@@ -50,7 +50,7 @@ def main():
         df2_non_null = df2[df2['Variant'].notnull()]
 
  
-        if st.button('Download All Results', key='download_all_results'):
+        if st.button('Download All Results', key='download_results'):
             download_results(result_df, 'results_all.xlsx')
 
         st.write("### History:")
