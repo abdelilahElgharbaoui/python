@@ -52,11 +52,10 @@ def main():
         st.write("### Results Variants with total quantity:")
         st.dataframe(result_df)
 
-        if st.button('Show Download link'):
-            output_buffer = BytesIO()
-            result_df.reset_index().to_excel(output_buffer, index=False)
-            output_buffer.seek(0)
-            st.download_button(label='Download Results', data=output_buffer, file_name='results.xlsx', key='download_button')
+       
+        if st.button('Download All Results'):
+            download_results(result_df, 'results_all.xlsx')
+
 
         st.write("### History:")
         st.dataframe(grouped_decomp)
@@ -67,11 +66,30 @@ def main():
         st.write("### Results:")
         st.dataframe(df2)
 
+        if st.button('Download Null Results'):
+            download_results(df2, 'results.xlsx')
+
+
         st.write("### Results not Null:")
         st.dataframe(df2_non_null)
 
+        if st.button('Download Non-Null Results'):
+            download_results(df2_non_null, 'results_non_null.xlsx')
+
+    
         st.write("### Results Null:")
         st.dataframe(df2_null)
+
+        if st.button('Download Null Results'):
+            download_results(df2_null, 'results_null.xlsx')
+
+
+def download_results(dataframe, filename):
+    output_buffer = BytesIO()
+    dataframe.reset_index().to_excel(output_buffer, index=False)
+    output_buffer.seek(0)
+    st.download_button(label=f'Download {filename}', data=output_buffer, file_name=filename, key=f'download_{filename}')
+
 
 if __name__ == '__main__':
     main()

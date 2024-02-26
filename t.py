@@ -27,15 +27,11 @@ def main():
         def sequence_same_elements(seq1, seq2):
             return np.array_equal(np.sort(seq1), np.sort(seq2))
 
-        for index, row in ys.iterrows():
-            wh_values = np.array(list(map(int, row['WH'].split(','))))
+        wh_values = np.array([np.array(list(map(int, row.split(',')))) for row in ys['WH']])
+        module_numbers = np.array([np.array(list(map(int, row.split(',')))) for row in xs['Number']])
 
-            for index_1, row_1 in xs.iterrows():
-                module_numbers = np.array(list(map(int, row_1['Number'].split(','))))
-
-                if sequence_same_elements(wh_values, module_numbers):
-                    ys.at[index, 'Variant'] = row_1['Variant']
-                    break
+        variant_index = np.argmax(np.all(np.sort(wh_values[:, None], axis=-1) == np.sort(module_numbers[None], axis=-1), axis=-1), axis=1)
+        ys['Variant'] = xs['Variant'].iloc[variant_index].values
 
         result_df = ys.groupby(['DDATE', 'Variant', 'WH'], as_index=False)['QTY'].sum()
 
