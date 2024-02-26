@@ -3,6 +3,12 @@ import pandas as pd
 import numpy as np
 from io import BytesIO
 
+def download_results(dataframe, filename):
+            output_buffer = BytesIO()
+            dataframe.reset_index().to_excel(output_buffer, index=False)
+            output_buffer.seek(0)
+            st.download_button(label=f'Download {filename}', data=output_buffer, file_name=filename, key=f'download_{filename}')
+
 def main():
     st.title('Matching Variants Application')
 
@@ -83,11 +89,6 @@ def main():
             download_results(df2_null, 'results_null.xlsx')
 
 
-        def download_results(dataframe, filename):
-            output_buffer = BytesIO()
-            dataframe.reset_index().to_excel(output_buffer, index=False)
-            output_buffer.seek(0)
-            st.download_button(label=f'Download {filename}', data=output_buffer, file_name=filename, key=f'download_{filename}')
 
 if __name__ == '__main__':
     main()
